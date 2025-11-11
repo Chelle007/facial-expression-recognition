@@ -62,6 +62,19 @@ function padBox(b, k=0.12){
   return { x, y, width:w, height:h };
 }
 
+// ✨ New function: highlight detected emotion
+function highlightEmotion(activeEmotion) {
+  EMOTIONS.forEach(em => {
+    const badge = document.getElementById(em);
+    if (!badge) return;
+    if (em === activeEmotion) {
+      badge.classList.add('active-emotion');
+    } else {
+      badge.classList.remove('active-emotion');
+    }
+  });
+}
+
 async function startCamera() {
   clearError();
   setRunning(true);
@@ -98,6 +111,7 @@ function stopCamera() {
   setStatus('Idle.');
   trackBox = null;         
   ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+  highlightEmotion(null);
 }
 
 function resizeCanvas() {
@@ -158,7 +172,7 @@ async function ensureOrtSession(key) {
   if (ortSessions[key]) return ortSessions[key];
   let path;
 
-  if (key === 'resnet18')       path = 'resnet18_emotion.onnx';
+  if (key === 'resnet18')       path = 'ResNet_18.onnx';
   if (key === 'mobilenetv2')    path = 'MobileNetv2.onnx';
   if (key === 'emotion_cnn')    path = 'emotion_cnn.onnx';
   if (key === 'efficientnetb0') path = 'EfficientNetB0.onnx';
@@ -287,15 +301,17 @@ async function trackLoop() {
     for (let i = 1; i < probs.length; i++) if (probs[i] > maxV) { maxV = probs[i]; maxI = i; }
     drawBoxAndLabel(trackBox, EMOTIONS[maxI], maxV);
     setStatus(`Detected: ${EMOTIONS[maxI]} ${(maxV*100).toFixed(1)}%`);
+    highlightEmotion(EMOTIONS[maxI]);
   } else if (trackBox) {
     drawBoxAndLabel(trackBox, 'Detecting...', 0);
     setStatus('Face found, running model...');
   } else {
     ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
     setStatus('Looking for a face...');
+    highlightEmotion(null);
   }
 
-  rafId = requestAnimationFrame(trackLoop);
+  setTimeout(trackLoop, 500);
 }
 
 startButton.addEventListener('click', startCamera);

@@ -105,6 +105,11 @@
       background:#f2f2f2;
       margin:2px 4px;
     }
+    .active-emotion {
+    background-color: #000000;
+    color: white;
+    transition: all 0.3s ease;
+  }
   </style>
 </head>
 <body>
@@ -136,13 +141,13 @@
 
   <div class="legend">
     Emotions:
-    <span class="badge">Surprise</span>
-    <span class="badge">Fear</span>
-    <span class="badge">Disgust</span>
-    <span class="badge">Happiness</span>
-    <span class="badge">Sadness</span>
-    <span class="badge">Anger</span>
-    <span class="badge">Neutral</span>
+    <span class="badge" id="Surprise">Surprise</span>
+    <span class="badge" id="Fear">Fear</span>
+    <span class="badge" id="Disgust">Disgust</span>
+    <span class="badge" id="Happiness">Happiness</span>
+    <span class="badge" id="Sadness">Sadness</span>
+    <span class="badge" id="Anger">Anger</span>
+    <span class="badge" id="Neutral">Neutral</span>
   </div>
 
   <script src="face-api.min.js"></script>
