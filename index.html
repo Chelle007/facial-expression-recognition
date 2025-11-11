@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/e551444f35.js" crossorigin="anonymous"></script>
+  <title>Facial Expression Recognition</title>
+  <style>
+    body { 
+      display:flex; 
+      flex-direction:column; 
+      align-items:center; 
+      justify-content:center; 
+      min-height:100vh; 
+      margin:0; padding:20px; 
+      font-family:system-ui; 
+    }
+    h1 { 
+      color:#323232; 
+      margin-bottom:8px; 
+    }
+    .video-wrapper {
+       position:relative; 
+       width:100%; 
+       max-width:1080px; 
+       aspect-ratio:16/9; 
+       background: #000000;
+      }
+    #webcamVideo { 
+      position:absolute; 
+      inset:0; 
+      width:100%; 
+      height:100%; 
+      transform: scaleX(-1);
+      border-radius:8px; 
+      object-fit: cover; 
+    }
+    #faceCanvas{
+      position:absolute; 
+      inset:0; 
+      width:100%; 
+      height:100%; 
+      border-radius:8px; 
+    }
+    #webcamVideo { 
+      background:#000000; 
+      border:4px solid #000000; 
+    }
+    .controls { 
+      margin-top:14px; 
+      display:flex; gap:8px; 
+      flex-wrap:wrap; 
+      align-items:center; 
+      justify-content:center; 
+    }
+    button { 
+      font-size:1rem; 
+      padding:10px 20px; 
+      border-radius:10px; 
+      border:none; 
+      cursor:pointer; 
+      background:#000000; 
+      color:#ffffff;
+    }
+    #startButton, #stopButton { 
+      width:100px; 
+      height:100px; 
+      border-radius:50%; 
+      font-size:40px; 
+      display:grid; 
+      place-items:center;
+    }
+    #startButton:hover{
+      background-color:rgb(0, 168, 0)
+    }
+    #stopButton:hover{
+      background-color:#c62828
+    }
+    #errorMsg { 
+      margin-top:10px; 
+      color:#c62828; 
+      font-weight:600; 
+    }
+    .hidden { 
+      display:none
+    }
+    select, .pill { 
+      padding:10px 14px; 
+      border-radius:999px; 
+      border:1px solid #dedede; 
+      background:#ffffff; }
+    #status { 
+      margin-top:10px; 
+      font-weight:600; 
+    } 
+    .legend { 
+      margin-top:10px; 
+      opacity:.8; 
+      font-size:.9rem; 
+    }
+    .badge { 
+      display:inline-block; 
+      padding:4px 8px; 
+      border-radius:8px; 
+      background:#f2f2f2;
+      margin:2px 4px;
+    }
+    .active-emotion {
+    background-color: #000000;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  </style>
+</head>
+<body>
+  <h1>Facial Expression Recognition</h1>
+
+  <div class="video-wrapper">
+    <video id="webcamVideo" autoplay playsinline></video>
+    <canvas id="faceCanvas"></canvas>
+  </div>
+
+  <div class="controls">
+    <button id="startButton" title="Start camera"><i class="fa-solid fa-video"></i></button>
+    <button id="stopButton" class="hidden" title="Stop camera"><i class="fa-solid fa-video-slash"></i></button>
+
+    <label class="pill">
+      Model:
+      <select id="modelSelect">
+        <option value="face-api">face-api (expressions)</option>
+        <option value="resnet18">resnet18</option>
+        <option value="mobilenetv2">MobileNetv2</option>
+        <option value="emotion_cnn">emotion_cnn</option>
+        <option value="efficientnetb0">EfficientNetB0</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="status">Idle.</div>
+  <p id="errorMsg" class="hidden"></p>
+
+  <div class="legend">
+    Emotions:
+    <span class="badge" id="Surprise">Surprise</span>
+    <span class="badge" id="Fear">Fear</span>
+    <span class="badge" id="Disgust">Disgust</span>
+    <span class="badge" id="Happiness">Happiness</span>
+    <span class="badge" id="Sadness">Sadness</span>
+    <span class="badge" id="Anger">Anger</span>
+    <span class="badge" id="Neutral">Neutral</span>
+  </div>
+
+  <script src="face-api.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
