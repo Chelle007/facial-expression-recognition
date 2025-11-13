@@ -13,7 +13,7 @@ The goal is to compare model performance in terms of **classification accuracy**
 
 ## 📊 Dataset
 
-The project uses the [**Raf-DB (Real-world Affective Faces Database)**](https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset), which contains real-world facial images annotated with seven basic emotion labels.
+The project uses the **Raf-DB (Real-world Affective Faces Database)**, which contains real-world facial images annotated with seven basic emotion labels.
 
 Preprocessing steps include:
 
@@ -25,7 +25,7 @@ Preprocessing steps include:
 
 ## 🌐 Data Source
 
-The RAF-DB dataset is publicly available via **Kaggle** for training and evaluation.
+The RAF-DB dataset is publicly available via [**Kaggle**](https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset) for training and evaluation.
 
 ---
 
@@ -51,7 +51,7 @@ All notebooks run directly in **Google Colab** with GPU support.
 - **MobileNetV2:**\
   [https://colab.research.google.com/drive/1Epq0YbM-MDjiAdSvqnl7fOrpdZYSywYr#scrollTo=87VDVa1eziFd](https://colab.research.google.com/drive/1Epq0YbM-MDjiAdSvqnl7fOrpdZYSywYr#scrollTo=87VDVa1eziFd)
 
-- **EfficientNet-B0**
+- **EfficientNet-B0:**\
   https://colab.research.google.com/drive/16-Ra3G_Rwnx3yB7YndqpA5rkmFln_WnK?usp=sharing
 
 - **ResNet18:**\
