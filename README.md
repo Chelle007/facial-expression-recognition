@@ -59,6 +59,8 @@ All notebooks run directly in **Google Colab** with GPU support.
 
 All dependencies install automatically when each notebook is run.
 
+> The **executed notebooks with output cells** are saved in the `ipynb` folder.
+
 ---
 
 ## 📦 Dependencies
