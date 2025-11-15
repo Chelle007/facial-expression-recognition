@@ -62,7 +62,6 @@ function padBox(b, k=0.12){
   return { x, y, width:w, height:h };
 }
 
-// ✨ Highlight detected emotion
 function highlightEmotion(activeEmotion) {
   EMOTIONS.forEach(em => {
     const badge = document.getElementById(em);
